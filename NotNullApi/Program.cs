@@ -1,7 +1,12 @@
+using NotNullApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.ModelValidatorProviders.Insert(0, new NonNullableEnumerableValidatorProvider());
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
